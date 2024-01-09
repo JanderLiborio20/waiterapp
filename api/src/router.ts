@@ -3,6 +3,11 @@ import multer from 'multer';
 import path from 'node:path';
 import { createCategory } from './app/useCases/categories/createCategory';
 import { listCategories } from './app/useCases/categories/listCategories';
+import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
+import { cancelOrder } from './app/useCases/orders/cancelOrder';
+import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
+import { createOrder } from './app/useCases/orders/createOrder';
+import { listOrder } from './app/useCases/orders/listOrder';
 import { createProducts } from './app/useCases/products/createProducts';
 import { listProducts } from './app/useCases/products/listProducts';
 
@@ -32,26 +37,16 @@ router.get('/products', listProducts);
 router.post('/products', upload.single('image'), createProducts);
 
 // Get products by category
-router.get('/categories/:categoryId/products', (req, res) => {
-  res.send('ok');
-});
+router.get('/categories/:categoryId/products', listProductsByCategory);
 
 // List orders
-router.get('/orders', (req, res) => {
-  res.send('ok');
-});
+router.get('/orders', listOrder);
 
 // Create order
-router.post('/orders', (req, res) => {
-  res.send('ok');
-});
+router.post('/orders', createOrder);
 
 // Change order status
-router.patch('/orders/:orderId', (req, res) => {
-  res.send('ok');
-});
+router.patch('/orders/:orderId', changeOrderStatus);
 
 // Delete/Cancel order
-router.delete('/orders/:orderId', (req, res) => {
-  res.send('ok');
-});
+router.delete('/orders/:orderId', cancelOrder);
