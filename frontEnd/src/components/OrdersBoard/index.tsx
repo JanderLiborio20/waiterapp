@@ -11,14 +11,16 @@ interface OrdersBoard {
 
 export function OrdersBoard({ icon, title, orders }: OrdersBoard) {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectOrder, setSelectedOrder] = useState<Order | null>(null);
 
-  function handleOpenModal() {
+  function handleOpenModal(order: Order) {
     setIsModalVisible(true);
+    setSelectedOrder(order);
   }
 
   return (
     <Board>
-      <OrderModal visible={isModalVisible} />
+      <OrderModal visible={isModalVisible} order={selectOrder} />
 
       <header>
         <span>{icon}</span>
@@ -29,7 +31,11 @@ export function OrdersBoard({ icon, title, orders }: OrdersBoard) {
       {orders.length > 0 && (
         <OrdersContainer>
           {orders.map((order) => (
-            <button type="button" key={order._id} onClick={handleOpenModal}>
+            <button
+              type="button"
+              key={order._id}
+              onClick={() => handleOpenModal(order)}
+            >
               <strong>Mesa {order.table}</strong>
               <span>{order.products.length} itens</span>
             </button>
