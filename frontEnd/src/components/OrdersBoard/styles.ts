@@ -36,6 +36,7 @@ export const OrdersContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 4px;
+    outline: none;
 
     strong {
       font-weight: 500;
